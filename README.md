@@ -1,2 +1,4 @@
 # cellular-PCF
-This project aims to develop a generalizable computational framework to generate pair correlation functions for self-organizing cellular systems given their position coordinates.
+
+## Abstract
+Biological cells tend to self-organize. This emergent property gives rise to the functional modules characteristic of life, such as tissues, organs, and eventually, systems. Although methods to describe the distribution and composition of such cellular systems exist, computing pair correlation functions could allow for more efficient data analysis since it would reduce the number of parameters required to describe a cluster of cells. This could be particularly useful in simulations since it has the potential to reduce memory requirements. This project aims to develop a generalizable computational framework to generate pair correlation functions for self-organizing cellular systems given their position coordinates. Factors to consider include cellular cohesion and the physical state of the medium in which the cells exist. Given their distinct layers and relatively symmetrical spatial patterning, tumor spheroids may be especially well-suited to this analysis.
