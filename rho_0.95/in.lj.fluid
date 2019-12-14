@@ -1,0 +1,52 @@
+# my file
+
+units	lj
+dimension 3
+boundary p p p
+atom_style atomic
+
+variable rho equal 0.95
+variable edgelen equal 5
+variable Temperature equal 1.0
+
+lattice 	fcc ${rho}
+region 		vikrambox block 0 ${edgelen} 0 ${edgelen} 0 ${edgelen}
+create_box 	1 vikrambox
+create_atoms    1 box
+
+mass		1 1.0
+
+neighbor	0.3 bin
+neigh_modify	every 1 delay 0 check yes
+
+velocity 	all create 1.0 87238748
+
+pair_style	lj/cut 2.5
+pair_coeff	1 1 1.0 1.0 2.5	# type_i type_j sigma epsilon cutoff
+
+dump		mymovie all atom 100 ljmovie.melt
+thermo_style	custom step temp vol press density pe etotal 
+
+# my particle dynamics simulation (NVT)
+fix 		heatsystem all nvt temp ${Temperature} ${Temperature} 1
+timestep	0.002
+thermo		10
+run		10000
+unfix		heatsystem
+
+variable Pressure equal press
+variable PotentialEnergy equal pe
+
+fix             reheat all nvt temp ${Temperature} ${Temperature} 1
+fix             average all ave/time 10 100 1000 v_Pressure ave running file pressure.out
+fix             energy_average all ave/time 10 100 1000 v_PotentialEnergy ave running file potential_energy.out
+dump            coords all custom 1000 data.coords.all.* id type mass x y z
+timestep        0.002
+thermo          10
+run             40000
+unfix 		average
+unfix		energy_average
+unfix           reheat
+undump 		coords
+
+shell 		sh cleanlog.sh

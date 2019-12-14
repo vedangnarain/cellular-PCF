@@ -1,0 +1,6 @@
+PrgEnv-gnu/5.2.82(10):ERROR:150: Module 'PrgEnv-gnu/5.2.82' conflicts with the currently loaded module(s) 'PrgEnv-cray/5.2.82'
+PrgEnv-gnu/5.2.82(10):ERROR:102: Tcl command execution failed: conflict PrgEnv-cray
+
+Boost version 1.65.0 (with gnu gcc compiled libraries) loaded.
+GSL version 2.3 loaded.
+LAMMPS simulator version 15May15 loaded.
